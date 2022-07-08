@@ -3,7 +3,7 @@ import {Grid} from "@mui/material";
 
 const MoviesList= ({children}) =>{
     return (
-        <Grid container justifyContent="center"  spacing={4} className="">
+        <Grid container justifyContent="center"  spacing={4}>
             {children}
         </Grid>
     )

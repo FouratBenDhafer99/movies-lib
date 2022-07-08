@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Box, Button, MobileStepper, Paper, Typography} from "@mui/material";
+import {Box, Button, Paper} from "@mui/material";
 import {KeyboardArrowLeft, KeyboardArrowRight} from "@mui/icons-material";
 
-const heroImgStyle={
+const heroStyle={
     width: '60%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -17,20 +17,14 @@ const arrowStyle={
 }
 const contentStyle={
     position: 'absolute',
-   // marginLeft: '20%',
     padding: '3px',
     width: '60%',
-    //height: '40px',
-
 }
+
 const Hero = ({data}) =>{
-
-
     const [gallery, setGallery]= useState([]);
     const [activeStep, setActiveStep] = useState(0);
     const maxSteps = (data.length/4)|0;
-
-
 
     const fillGallery =  async ()=>{
         let res=[],i=0
@@ -40,7 +34,6 @@ const Hero = ({data}) =>{
                 res[i++]= ran
         }
         setGallery(res)
-        console.log(data)
     }
 
     useEffect(()=>{
@@ -54,7 +47,7 @@ const Hero = ({data}) =>{
     let stepInterval;
     let intervalTime=5000;
     function auto() {
-        stepInterval = setInterval(activeStep==maxSteps?handleStepChange(0):handleNext, intervalTime);
+        stepInterval = setInterval(activeStep===maxSteps?handleStepChange(0):handleNext, intervalTime);
     }
     useEffect(() => {
         if (autoScroll) {
@@ -73,11 +66,11 @@ const Hero = ({data}) =>{
             </Button>
 
             {gallery.map( (movie, i)=>{return(
-                <Box style={heroImgStyle} key={i} className={i===activeStep?" opacity-100":""} >
+                <Box style={heroStyle} key={i} className={i===activeStep?" opacity-100":""} >
                     {
                         i===activeStep?
-                            <Paper className="">
-                                    <img  className=" w-full"
+                            <Paper>
+                                    <img  className="w-full" alt={movie.title+" cover picture"}
                                          src={process.env.REACT_APP_IMG_BASE_URL+movie.backdrop_path}/>
                                 <span style={contentStyle} className="bg-zinc-800 -mt-10 bg-opacity-50 text-sm text-white text-center align-middle font-mono text-lg
                                  transition ease-in-out delay-150 hover:-translate-y-56 h-[264px] overflow-hidden">
@@ -87,44 +80,9 @@ const Hero = ({data}) =>{
                             </Paper>:
                             <div/>
                     }
-
                 </Box>
             )})}
-
         </Box>
-
-        /*<Box sx={{ flexGrow: 1 }} className="w-full bg-purple-50">
-            <Paper square elevation={0} className=" w-full align-middle transiti">
-                <Typography className="bg-zinc-800 opacity-50 text-sm text-white ">
-                    {gallery.length?gallery[activeStep].title:null}
-                </Typography>
-            </Paper>
-            <Box>
-                {gallery.length?
-                    <img style={heroImgStyle} className="relative"
-                        src={process.env.REACT_APP_IMG_BASE_URL+gallery[activeStep].backdrop_path}/>
-                    :null}
-            </Box>
-
-            <Paper className="">
-                <MobileStepper
-
-                    activeStep={activeStep} steps={maxSteps}
-                    nextButton={
-                        <Button onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-                            Next <KeyboardArrowRight/>
-                        </Button>
-                    }
-                    backButton={
-                        <Button  onClick={handleBack} disabled={activeStep === 0} >
-                            Back <KeyboardArrowLeft/>
-                        </Button>
-                    } />
-            </Paper>
-
-
-
-        </Box>*/
     )
 }
 

@@ -20,7 +20,7 @@ const MovieModal= ({open, handleClose, movie, mode}) =>{
     return(
         <Modal open={open} onClose={handleClose} className={mode}>
             <Box style={style} className="bg-white text-black dark:bg-zinc-800 dark:text-white border-2 rounded-2xl p-7">
-                <img style={imgStyle} className="w-3/4 pb-4" src={process.env.REACT_APP_IMG_BASE_URL+movie.backdrop_path}/>
+                <img style={imgStyle} alt={movie.title+" cover picture"} className="w-3/4 pb-4" src={process.env.REACT_APP_IMG_BASE_URL+movie.backdrop_path}/>
                 <Typography variant="h4" component="h2">
                     {movie.title}
                 </Typography>

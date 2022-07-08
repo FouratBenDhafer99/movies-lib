@@ -10,17 +10,10 @@ function App() {
 
     const [mode, setMode]= useState('');
     const [movies, setMovies]= useState([]);
-    const [open, setOpen]= useState(false);
-
-    const handleOpen= () => setOpen(true)
-    const handleClose= () => setOpen(false)
-
 
     const fetchMovies = async ()=>{
-        // Fetch data..results from api
         const {data: {results}}= await axios.get(`${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}`);
-        console.log(results)
-        setMovies(results)
+        setMovies(results);
     }
 
     useEffect( ()=>{
@@ -34,19 +27,16 @@ function App() {
   return (
     <div className={mode}>
         <Navbar value={mode} onChange={changeMode}/>
-        <div className="">
-            {movies.length?<Hero  data={movies}/>:<div/>}
+        <div>
+            {movies.length?<Hero data={movies}/>:<div/>}
         </div>
         <div className="relative bg-white p-14 dark:bg-bg-img-dark bg-no-repeat bg-cover">
             <MoviesList>
                 {movies.map(movie=>
-                        <MoviesListItem key={movie.id} movie={movie} mode={mode} onClick={handleOpen} />
+                        <MoviesListItem key={movie.id} movie={movie} mode={mode} />
                     )}
-                    </MoviesList>
+            </MoviesList>
         </div>
-
-
-
     </div>
   );
 }

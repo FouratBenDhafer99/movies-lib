@@ -1,5 +1,5 @@
 import React from "react";
-import {AppBar, Button, IconButton, Stack, Switch, Toolbar, Typography} from "@mui/material";
+import {AppBar, IconButton, Stack, Switch, Toolbar, Typography} from "@mui/material";
 import {DarkMode, LightMode, MovieFilter} from "@mui/icons-material";
 
 function Navbar (props){

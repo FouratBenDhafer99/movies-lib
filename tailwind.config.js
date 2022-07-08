@@ -9,7 +9,6 @@ module.exports = {
       backgroundImage:{
         'bg-img-dark':"url('./assets/img/bgDark.jpg')"
       },
-
     },
   },
   plugins: [],
